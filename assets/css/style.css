@@ -1,0 +1,92 @@
+/*================== Geral ==================*/
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body , .banner {
+    height: 100%;
+}
+/*================== Layout ==================*/
+/*Navbar*/
+.nav-topo {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+}
+.nav-topo > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-topo h1 {
+    margin: 10px 0 15px 0 ;
+}
+.logo{
+    color: #000;
+    font-size: 45px;
+    font-family: "Lobster", cursive;
+}
+.logo:hover {
+    text-decoration: none;
+    color: #000;
+}
+.form-login {
+    display: flex;
+    align-items: center;
+}
+.form-login > .form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-login > .form-group > label {
+    margin: 0;
+    font-weight: 600;
+}
+.form-login > .form-group > input {
+    margin-right: 15px;
+}
+.form-login > input[type="submit"] {
+    height: 28px;
+    color: #fff;
+    font-weight: 600;
+    background-color: #00BFFF;
+    padding: 0 15px;
+    border: 1px solid #000;
+    margin-top: 7px;
+}
+
+/*Banner*/
+.banner {
+    background-image: url('../images/background1.png');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.texto-banner {
+    color: #fff;
+    text-align: center;
+    width: 80%;
+}
+.texto-banner > h2 {
+    font-size: 65px;
+}
+.texto-banner > p {
+    font-size: 45px;
+}
+.texto-banner > h2, .texto-banner > p {
+    text-shadow: 2px 2px #000;
+}
+.botao-banner {
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 15px 23px;
+    background-color: deepskyblue;
+    border-radius: 50px;
+}
+.botao-banner:hover {
+    text-decoration: none;
+    color: #fff;
+}

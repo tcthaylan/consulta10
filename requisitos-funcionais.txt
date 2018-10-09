@@ -1,0 +1,44 @@
+///Requisitos Funcionais///
+- O sistema deve realizar login e cadastro
+- Confirmação de cadastro
+- Recuperação de senha
+- O sistema deve exibir uma lista para o paciente com os médicos cadastrados no site
+- O sistema deve exibir uma lista com as consultas agendadas para o paciente
+- O sistema deve exibir uma lista com as consultas marcadas para o médico
+- O sistema deve enviar um email para o paciente/médico sempre que houver uma marcação/cancelamento de consulta
+- Todas as listas devem possuir filtros, ex (nome do médico, endereço, plano de saúde, especialização, horário de atendimento e etc).
+
+///Banco de Dados///
+Pacientes
+- id_paciente*
+- nome_completo*
+- cpf*
+- data_nascimento*
+- email*
+- senha*
+- plano_de_saude
+
+Médicos
+- id_medico*
+- nome_completo*
+- cpf*
+- data_nascimento*
+- email*
+- senha*
+- crm*
+- especialidade
+- endereço_consultorio
+
+Consultas
+- id_consulta*
+- id_paciente*
+- id_medico*
+- data_inicio*
+- data_fim*
+
+Token (ou criar um token para pacientes e outro para médicos)
+- id_token
+- cpf
+- hash
+- used
+- expirado_em
