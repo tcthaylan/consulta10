@@ -81,6 +81,8 @@ CREATE TABLE IF NOT EXISTS `consulta10`.`Medico` (
   `id_medico` INT NOT NULL AUTO_INCREMENT,
   `nome_medico` VARCHAR(100) NOT NULL,
   `sobrenome_medico` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `senha` VARCHAR(32) NOT NULL,
   `cpf` VARCHAR(11) NOT NULL UNIQUE,
   `crm` VARCHAR(45) NOT NULL UNIQUE,
   `data_nascimento` DATE NOT NULL,

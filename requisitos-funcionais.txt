@@ -1,9 +1,12 @@
 ///Requisitos Funcionais///
 - O sistema deve realizar login e cadastro
-- Confirmação de cadastro
-- Recuperação de senha
+- Confirmação de cadastro (somente quando tiver hospedagem).
+- Recuperação de senha (somente quando estiver hospedado).
 - O sistema deve exibir uma lista para o paciente com os médicos cadastrados no site
 - O sistema deve exibir uma lista com as consultas agendadas para o paciente
 - O sistema deve exibir uma lista com as consultas marcadas para o médico
 - O sistema deve enviar um email para o paciente/médico sempre que houver uma marcação/cancelamento de consulta
 - Todas as listas devem possuir filtros, ex (nome do médico, endereço, plano de saúde, especialização, horário de atendimento e etc).
+
+
+Atualizar MER
