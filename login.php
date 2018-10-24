@@ -10,7 +10,9 @@ require('config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta 10</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Libre+Baskerville|Montserrat" rel="stylesheet">
+
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Meu CSS -->
@@ -18,32 +20,56 @@ require('config.php');
 </head>
 <body>
     <!-- Navbar --> 
-    <header class="nav-topo">
+    <header class="header-nav">
         <div class="container">
-            <!-- Logo -->
-            <h1><a href="#" class="logo">Logo</a></h1>
-            <!-- Form Login -->
-            <form method="POST" class="form-login">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha">
-                </div>
-                <input type="submit" value="Entrar">
-            </form>
+            <div class="logo">
+                Consulta10
+            </div>
+            <div class="botoes-header">
+                <a href="#" class="botao-entrar">Entrar</a>
+                <a href="#" class="botao-cadastrar">Criar conta</a>
+            </div>
         </div>
     </header>
-
-    <!-- Banner 1 -->
+    <!-- Banner -->
     <section class="banner">
-        <header class="texto-banner">
-            <h2>Deserunt Veniam Dolor Aute</h2>
-            <p>Veniam culpa ullamco qui qui exercitation sit</p>
-            <a href="#" class="botao-banner">Comece agora</a>
-        </header>
+        <div class="container">
+            <header class="texto-banner">
+                <p>WE IMPROVE PEOPLE’S LIVES AND</p>
+                <h1>Benefit Society</h1>
+                <a href="#" class="botao-banner">Get in touch</a>
+            </header>
+        </div>
+    </section>
+    <!-- Section Cards -->
+    <section class="cards">
+        <div class="card-1">
+            <h3 class="card-titulo">For Adults</h3>
+            <p class="card-subtitulo">You can call our highly experienced clinical team if your child, teenager or family is going through difficulties.</p>
+            <ul class="card-lista">
+                <li>DEPRESSION</li>
+                <li>DEPRESSION</li>
+                <li>DEPRESSION</li>
+            </ul>
+        </div>
+        <div class="card-2">
+            <h3 class="card-titulo">For Children</h3>
+            <p class="card-subtitulo">You can call our highly experienced clinical team if your child, teenager or family is going through difficulties.</p>
+            <ul class="card-lista">
+                <li>DEPRESSION</li>
+                <li>DEPRESSION</li>
+                <li>DEPRESSION</li>
+            </ul>
+        </div>
+        <div class="card-3">
+            <h3 class="card-titulo">For Business</h3>
+            <p class="card-subtitulo">You can call our highly experienced clinical team if your child, teenager or family is going through difficulties.</p>
+            <ul class="card-lista">
+                <li>DEPRESSION</li>
+                <li>DEPRESSION</li>
+                <li>DEPRESSION</li>
+            </ul>
+        </div>
     </section>
     <!-- Jquery, Bootstrap.js e meu js -->
     <script src="assets/js/jquery-3.3.1.min.js"></script>
