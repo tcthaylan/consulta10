@@ -9,4 +9,15 @@
 - Todas as listas devem possuir filtros, ex (nome do médico, endereço, plano de saúde, especialização, horário de atendimento e etc).
 
 
+
+
 Atualizar MER
+
+método cpf corrigido, erro de lógica
+cadastro paciente funcionando
+Classe especialidade criada
+alteração classe medico
+
+- Colocar mascaras nos campos de cadastro
+- Deixar header dinamico
+- criar area paciente (filtros, )

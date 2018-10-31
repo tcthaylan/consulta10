@@ -47,42 +47,50 @@ class Medico
     }
     
     // Cadastra um médico.
-    public function cadastrar($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res = null, $num_cel = null)
+    public function cadastrarMedico($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res = null, $num_cel = null)
     {
-        // Verifica se o email é válido (não está em uso).
-        $stmt = $this->conn->prepare('SELECT *, (SELECT paciente.email FROM paciente WHERE paciente.email = :email) FROM medico WHERE email = :email');
+        // Verifica se algum medico está usando o email.
+        $stmt = $this->conn->prepare('SELECT * FROM medico WHERE email = :email');
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         if ($stmt->rowCount() == 0) {
-            // Email válido, verificando CPF e CRM.
-            if ($this->validaCPF($cpf) == true && $this->validaCRM($crm) == true) {
-                // CPF e CRM válidos...
-                // Cadastrando endereço e salvando id.
-                $id_endereco_consultorio = $this->cadastrarEndereco($nome_rua, $numero_rua, $complemento, $cep);
+            // Verifica se algum paciente está usando o email.
+            $stmt = $this->conn->prepare('SELECT * FROM paciente WHERE email = :email');
+            $stmt->bindValue(':email', $email);
+            $stmt->execute();
+            if ($stmt->rowCount() == 0) {
+                // Email disponível, verificando CPF e CRM.
+                if ($this->validaCPF($cpf) == true && $this->validaCRM($crm) == true) {
+                    // CPF e CRM válidos...
+                    // Cadastrando endereço e salvando id.
+                    $id_endereco_consultorio = $this->cadastrarEndereco($nome_rua, $numero_rua, $complemento, $cep);
 
-                // Cadastrando telefone e salvando id
-                $id_telefone_medico = $this->cadastrarTelefone($num_res, $num_cel);
+                    // Cadastrando telefone e salvando id
+                    $id_telefone_medico = $this->cadastrarTelefone($num_res, $num_cel);
 
-                // Cadastrando médico.
-                $stmt = $this->conn->prepare('INSERT INTO medico VALUES (DEFAULT, :nome_medico, :sobrenome_medico, :cpf, :crm, :data_nascimento, :id_especialidade, :id_endereco_consultorio, :id_tipo_usuario, :id_telefone_medico, :email, :senha)');
-                $stmt->bindValue(':nome_medico', $nome_medico);
-                $stmt->bindValue(':sobrenome_medico', $sobrenome_medico);
-                $stmt->bindValue(':cpf', $cpf);
-                $stmt->bindValue(':crm', $crm);
-                $stmt->bindValue(':data_nascimento', $data_nascimento);
-                $stmt->bindValue(':id_especialidade', $id_especialidade);
-                $stmt->bindValue(':id_endereco_consultorio', $id_endereco_consultorio);
-                $stmt->bindValue(':id_tipo_usuario', $id_tipo_usuario);
-                $stmt->bindValue(':id_telefone_medico', $id_telefone_medico);
-                $stmt->bindValue(':email', $email);
-                $stmt->bindValue(':senha', $senha);
-                $stmt->execute();
-                return true;
+                    // Cadastrando médico.
+                    $stmt = $this->conn->prepare('INSERT INTO medico VALUES (DEFAULT, :nome_medico, :sobrenome_medico, :cpf, :crm, :data_nascimento, :id_especialidade, :id_endereco_consultorio, :id_tipo_usuario, :id_telefone_medico, :email, :senha)');
+                    $stmt->bindValue(':nome_medico', $nome_medico);
+                    $stmt->bindValue(':sobrenome_medico', $sobrenome_medico);
+                    $stmt->bindValue(':cpf', $cpf);
+                    $stmt->bindValue(':crm', $crm);
+                    $stmt->bindValue(':data_nascimento', $data_nascimento);
+                    $stmt->bindValue(':id_especialidade', $id_especialidade);
+                    $stmt->bindValue(':id_endereco_consultorio', $id_endereco_consultorio);
+                    $stmt->bindValue(':id_tipo_usuario', $id_tipo_usuario);
+                    $stmt->bindValue(':id_telefone_medico', $id_telefone_medico);
+                    $stmt->bindValue(':email', $email);
+                    $stmt->bindValue(':senha', $senha);
+                    $stmt->execute();
+                    return true;
+                } else {
+                    // CPF e/ou CRM inválido(s).
+                    return false;
+                }
             } else {
-                // CPF e/ou CRM inválido(s).
+                // Email inválido (está em uso).
                 return false;
             }
-
         } else {
             // Email inválido (está em uso).
             return false;
@@ -98,7 +106,7 @@ class Medico
         $stmt->bindValue(':complemento', $complemento);
         $stmt->bindValue(':cep', $cep);
         $stmt->execute();
-        return $this->conn->lastIdInsert();
+        return $this->conn->lastInsertId();
     }
 
     // Cadastra um telefone e retorna o id_telefone_medico
@@ -108,7 +116,7 @@ class Medico
         $stmt->bindValue(':num_residente', $num_res);
         $stmt->bindValue(':num_celular', $num_cel);
         $stmt->execute();
-        return $this->conn->lastIdInsert();
+        return $this->conn->lastInsertId();
     }
 
     // Verifica CRM

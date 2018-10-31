@@ -114,7 +114,7 @@ class Paciente
         }
 
         // Verifica se o CPF está disponível
-        $stmt = $this->conn->prepare('SELECT * FROM medico WHERE cpf = :cpf');
+        $stmt = $this->conn->prepare('SELECT * FROM paciente WHERE cpf = :cpf');
         $stmt->bindValue(':cpf', $cpf);
         $stmt->execute();
         if ($stmt->rowCount() > 0) {

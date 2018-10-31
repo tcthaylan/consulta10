@@ -15,7 +15,7 @@ if (isset($_POST['nome_paciente']) && !empty($_POST['nome_paciente'])) {
         if ($p->cadastrarPaciente($nome_paciente, $sobrenome_paciente, $cpf, $data_nascimento, $email, $senha, $id_tipo_usuario)) {
             ?>
             <div class="alert alert-success">
-                <strong>Parabéns!</strong> Cadastrado com sucesso.<a href="login.php" class="alert-link">entrar</a>.
+                <strong>Parabéns!</strong> Cadastrado com sucesso. <a href="login.php" class="alert-link">Entrar</a>.
             </div>
             <?php
         } else {
@@ -36,12 +36,12 @@ if (isset($_POST['nome_paciente']) && !empty($_POST['nome_paciente'])) {
 ?>
 
 <div class="form-cadastro">
-    <h2 class="form-titulo">Eiusmod consequat nisi minim dolore.</h2>
+    <h2 class="form-titulo">Paciente</h2>
     <form method="POST">
         <input type="text" name="nome_paciente" id="nome_paciente" placeholder="Nome" class="form-control">
         <input type="text" name="sobrenome_paciente" id="sobrenome_paciente" placeholder="Sobrenome" class="form-control">
-        <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control">
         <input type="text" name="data_nascimento" id="data_nascimento" placeholder="Data Nascimento" class="form-control">
+        <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control">
         <input type="text" name="email" id="email" placeholder="Email" class="form-control">
         <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control">
 
