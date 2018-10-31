@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Conexão com Banco de Dados
 global $conn;
 try {

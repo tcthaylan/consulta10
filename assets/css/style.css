@@ -6,8 +6,11 @@
 body {
     font-family: 'Lato', sans-serif;
 }
-html, body , .banner {
-    height: 89%;
+html, body {
+    height: 100%;
+}
+.banner {
+    height: 70%;
 }
 /*================== Layout ==================*/
 /*Header-nav*/
@@ -115,4 +118,66 @@ html, body , .banner {
 .card-lista li {
     margin-bottom: 10px;
     font-weight: 700;
+}
+
+/*==== Login.php ====*/
+.form-login {
+    position: absolute;
+    left: 50%;
+    margin-top: 100px;
+    margin-left: -160px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    padding: 20px;
+    width: 320px;
+    text-align: center;
+}
+.form-titulo {
+    margin: 15px 0;
+}
+.form-login input {
+    margin-bottom: 15px;
+}
+.form-login .botao-login {
+    background-color: #005EA6;
+    color: #fff;
+    font-weight: 600;
+    padding: 15px 80px;
+    margin: 6px 0 15px 0;
+    width: 100%;
+    border-radius: 3px;
+    border: none;
+    display: inline-block;
+}
+/*==== Registrar.php ====*/
+.escolha {
+    text-align: center;
+}
+.escolha h2 {
+    font-size: 45px;
+    margin: 50px 0;
+}
+.escolha-item {
+    padding: 0 80px;
+}
+.escolha-item h5 {
+    font-size: 27px;
+    margin-top: 13px;
+}
+.escolha-item p {
+    color: #C0BFC1;
+    font-size: 17px;
+}
+.botao-continuar {
+    background-color: #005EA6;
+    color: #fff;
+    font-weight: 600;
+    padding: 15px 80px;
+    margin: 6px 0;
+    border-radius: 50px;
+    display: inline-block;
+}
+.botao-continuar:hover {
+    text-decoration: none;
+    color: #fff;
 }

@@ -25,6 +25,27 @@ class Medico
         return $array;
     }
 
+    // Login Médico
+    public function loginMedico($email, $senha)
+    {
+        $stmt = $this->conn->prepare('SELECT * FROM medico WHERE email = :email AND senha = :senha');
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':senha', $senha);
+        $stmt->execute();
+
+        // Verificando se email e senha são válidos.
+        if ($stmt->rowCount() > 0) {
+            // Email válido
+            $info = $stmt->fetch();
+            $_SESSION['id_usuario'] = $info['id_medico'];
+            $_SESSION['id_tipo_usuario'] = $info['id_tipo_usuario'];
+            return true;
+        } else {
+            // Email inválido
+            return false;
+        }
+    }
+    
     // Cadastra um médico.
     public function cadastrar($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res = null, $num_cel = null)
     {

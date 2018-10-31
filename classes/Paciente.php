@@ -8,31 +8,60 @@ class Paciente
         $this->conn = $conn;
     }
 
-    // Cadastra Paciente
-    public function cadastrar($nome_paciente, $sobrenome_paciente, $cpf, $data_nascimento, $email, $senha, $id_tipo_usuario)
+    // Login Paciente
+    public function loginPaciente($email, $senha)
     {
-        // Verifica se o email é válido (não está em uso).
-        $stmt = $this->conn->prepare('SELECT *, (SELECT medico.email FROM medico WHERE medico.email = :email) FROM paciente WHERE email = :email');
+        $stmt = $this->conn->prepare('SELECT * FROM paciente WHERE email = :email AND senha = :senha');
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':senha', $senha);
+        $stmt->execute();
+
+        // Verificando se email e senha são válidos.
+        if ($stmt->rowCount() > 0) {
+            // Email válido
+            $info = $stmt->fetch();
+            $_SESSION['id_usuario'] = $info['id_paciente'];
+            $_SESSION['id_tipo_usuario'] = $info['id_tipo_usuario'];
+            return true;
+        } else {
+            // Email inválido
+            return false;
+        }
+    }
+
+    // Cadastra Paciente
+    public function cadastrarPaciente($nome_paciente, $sobrenome_paciente, $cpf, $data_nascimento, $email, $senha, $id_tipo_usuario)
+    {
+        // Verifica se algum paciente está usando o email.
+        $stmt = $this->conn->prepare('SELECT * FROM paciente WHERE email = :email');
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         if ($stmt->rowCount() == 0) {
-            // Email disponível, verificando CPF.
-            if ($this->validaCPF($cpf) == true) {
-                // CPF válido, inserindo usuário.
-                $stmt = $this->conn->prepare('INSERT INTO paciente (nome_paciente, sobrenome_paciente, cpf, data_nascimento, email, senha, id_tipo_usuario) 
-                VALUES (:nome_paciente, :sobrenome_paciente, :cpf, :data_nascimento, :email, :senha, :id_tipo_usuario)');
-                $stmt->bindValue(':nome_paciente', $nome_paciente);
-                $stmt->bindValue(':sobrenome_paciente', $sobrenome_paciente);
-                $stmt->bindValue(':cpf', $cpf);
-                $stmt->bindValue(':data_nascimento', $data_nascimento);
-                $stmt->bindValue(':email', $email);
-                $stmt->bindValue(':senha', $senha);
-                $stmt->bindValue(':id_tipo_usuario', $id_tipo_usuario);
-                $stmt->execute();
-
-                return true;    
+            // Verifica se algum medico está usando o email.
+            $stmt = $this->conn->prepare('SELECT * FROM medico WHERE email = :email');
+            $stmt->bindValue(':email', $email);
+            $stmt->execute();
+            if ($stmt->rowCount() == 0) {
+                // Email disponível, verificando CPF.
+                if ($this->validaCPF($cpf) == true) {
+                    // CPF válido, inserindo usuário.
+                    $stmt = $this->conn->prepare('INSERT INTO paciente (nome_paciente, sobrenome_paciente, cpf, data_nascimento, email, senha, id_tipo_usuario) 
+                    VALUES (:nome_paciente, :sobrenome_paciente, :cpf, :data_nascimento, :email, :senha, :id_tipo_usuario)');
+                    $stmt->bindValue(':nome_paciente', $nome_paciente);
+                    $stmt->bindValue(':sobrenome_paciente', $sobrenome_paciente);
+                    $stmt->bindValue(':cpf', $cpf);
+                    $stmt->bindValue(':data_nascimento', $data_nascimento);
+                    $stmt->bindValue(':email', $email);
+                    $stmt->bindValue(':senha', $senha);
+                    $stmt->bindValue(':id_tipo_usuario', $id_tipo_usuario);
+                    $stmt->execute();
+                    return true;    
+                } else {
+                    // CPF inválido.
+                    return false;
+                }
             } else {
-                // CPF inválido.
+                // Email inválido (está em uso).
                 return false;
             }
         } else {
