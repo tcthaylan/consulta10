@@ -19,9 +19,27 @@
             <div class="logo">
                 <a href="index.php">Consulta10</a>
             </div>
-            <div class="botoes-header">
-                <a href="login.php" class="botao-entrar">Entrar</a>
-                <a href="cadastrar.php" class="botao-cadastrar">Criar conta</a>
+            <div class="navegacao">
+                <nav class="nav-usuario">
+                    <?php if (!empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 1): ?>
+                        <ul>
+                            <li>
+                                <a href="area-paciente.php">Buscar médicos</a>
+                            </li>
+                            <li>
+                                <a href="consultas-agendadas.php">Consultas agendadas</a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
+                </nav>
+                <div class="botoes-header">
+                    <?php if (empty($_SESSION['id_usuario'])): ?>
+                        <a href="login.php" class="botao-entrar">Entrar</a>
+                        <a href="cadastrar.php" class="botao-cadastrar">Criar conta</a>
+                    <?php else: ?>
+                        <a href="sair.php" class="botao-sair">Sair</a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </header>

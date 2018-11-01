@@ -8,14 +8,12 @@ class Medico
         $this->conn = $conn;
     }
 
-    // Retorna um array com todos os médicos cadastrados.
-    // Revisar query, está com erro!!!
+    // Retorna um array com dados dos médicos cadastrados.
     public function getMedicos()
     {
-        $stmt = $this->conn->query('SELECT nome_medico, sobrenome_medico, email, 
-        (SELECT especialidade.nome_especialidade FROM especialidade),
-        (SELECT endereco_consultorio.nome_rua, endereco_consultorio.numero_rua, endereco_consultorio.cep FROM endereco_consultorio),
-        (SELECT telefone_medico.num_residente, telefone_medico.num_celular FROM telefone_medico) 
+        $stmt = $this->conn->query('SELECT medico.nome_medico, medico.sobrenome_medico, especialidade.nome_especialidade, especialidade.desc, endereco_consultorio.estado, endereco_consultorio.cidade 
+        FROM medico LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade 
+        LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio; ) 
         FROM medico');
         $array = array();
         if ($stmt->rowCount() > 0) {
@@ -23,6 +21,14 @@ class Medico
             return $array;
         }
         return $array;
+    }
+
+    // Retorna o quantidade de médicos cadastrados.
+    public function getTotalMedicos()
+    {
+        $stmt = $this->conn->query('SELECT COUNT(*) AS qtd_medicos FROM medico');
+        $info = $stmt->fetch();
+        return $info['qtd_medicos'];
     }
 
     // Login Médico
@@ -186,5 +192,12 @@ class Medico
         }
 
         return true;
+    }
+
+    // Calcula total de páginas
+    public function getTotalPaginas($qtd_por_pagina, $total_medicos)
+    {
+        $qtd_paginas = $total_medicos / $qtd_por_pagina;
+        return $qtd_paginas;
     }
 }

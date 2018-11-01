@@ -1,4 +1,10 @@
 <?php require_once('pages/header.php'); ?>
+<?php
+if (!empty($_SESSION['id_usuario'])) {
+    header('Location: area-usuario.php');
+    exit;
+}
+?>
 <!-- Banner -->
 <section class="banner">
     <div class="container">
