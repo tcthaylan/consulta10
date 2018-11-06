@@ -13,6 +13,8 @@ if (isset($_POST['nome_medico']) && !empty($_POST['nome_medico'])) {
     $crm                = addslashes($_POST['crm']);
     $data_nascimento    = addslashes($_POST['data_nascimento']);
     $id_especialidade   = addslashes($_POST['id_especialidade']);
+    $estado             = addslashes($_POST['estado']);
+    $cidade             = addslashes($_POST['cidade']);
     $nome_rua           = addslashes($_POST['nome_rua']);
     $numero_rua         = addslashes($_POST['numero_rua']);
     $complemento        = addslashes($_POST['complemento']);
@@ -24,7 +26,7 @@ if (isset($_POST['nome_medico']) && !empty($_POST['nome_medico'])) {
     $num_cel            = addslashes($_POST['num_cel']);
 
     if (!empty($_POST['nome_medico']) && !empty($_POST['sobrenome_medico']) && !empty($_POST['cpf']) && !empty($_POST['crm']) && !empty($_POST['data_nascimento']) && !empty($_POST['nome_rua']) && !empty($_POST['numero_rua']) && !empty($_POST['complemento']) && !empty($_POST['cep']) && !empty($_POST['email']) && !empty($_POST['senha']) && (!empty($_POST['num_res']) || !empty($_POST['num_cel'])) ) {
-        if ($m->cadastrarMedico($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res, $num_cel)) {
+        if ($m->cadastrarMedico($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $estado, $cidade, $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res, $num_cel)) {
             ?>
             <div class="alert alert-success">
                 <strong>Parabéns!</strong> Cadastrado com sucesso. <a href="login.php" class="alert-link">Entrar</a>.
@@ -62,6 +64,9 @@ if (isset($_POST['nome_medico']) && !empty($_POST['nome_medico'])) {
                 <option value="<?php echo $value['id_especialidade'] ?>"><?php echo $value['nome_especialidade'] ?></option>    
             <?php endforeach; ?>
         </select>
+
+        <input type="text" name="estado" id="estado" placeholder="Estado" class="form-control">
+        <input type="text" name="cidade" id="cidade" placeholder="Cidade" class="form-control">
 
         <input type="text" name="nome_rua" id="nome_rua" placeholder="Rua" class="form-control">
         <input type="text" name="numero_rua" id="numero_rua" placeholder="Número" class="form-control">

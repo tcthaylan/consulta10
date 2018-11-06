@@ -10,28 +10,10 @@
 
 
 Tarefas
-- Header dinâmico
-- Area paciente
-- Listagem de m
+- Paginação
 - Filtros
-
-
+- Mais detalhes
+- Consultas agendadas
+- 
 Atualizar MER
 
-método cpf corrigido, erro de lógica
-cadastro paciente funcionando,
-Classe especialidade criada
-alteração classe medico
-
-- Colocar mascaras nos campos de cadastro
-- Deixar header dinamico
-- criar area paciente (filtros, )
-
-Area Paciente 
-Buscar médicos
-Filtros
-Número de médicos cadastrados
-Lista médicos (Nome, especialização, endereço), botao mais detalhes
-Descrição:
-
-Paginação

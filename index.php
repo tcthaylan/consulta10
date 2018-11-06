@@ -1,7 +1,7 @@
 <?php require_once('pages/header.php'); ?>
 <?php
 if (!empty($_SESSION['id_usuario'])) {
-    header('Location: area-usuario.php');
+    header('Location: area-paciente.php');
     exit;
 }
 ?>

@@ -9,13 +9,34 @@ class Medico
     }
 
     // Retorna um array com dados dos médicos cadastrados.
-    public function getMedicos()
+    public function getMedicos($page, $perPage, $filtros)
     {
-        $stmt = $this->conn->query('SELECT medico.nome_medico, medico.sobrenome_medico, especialidade.nome_especialidade, especialidade.desc, endereco_consultorio.estado, endereco_consultorio.cidade 
-        FROM medico LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade 
-        LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio; ) 
-        FROM medico');
         $array = array();
+
+        $offset = ($page - 1) * $perPage;
+
+        $filtroString = array("1=1");
+        if (!empty($filtros['nome_medico'])) {
+            $filtroString[] = "nome_medico LIKE '%:nome_medico%'";
+        }
+        if (!empty($filtros['especialidade'])) {
+            $filtroString[] = 'especialidade.id_especialidade = :especialidade';
+        }
+
+        $stmt = $this->conn->prepare("SELECT medico.nome_medico, medico.sobrenome_medico, especialidade.nome_especialidade, especialidade.desc, endereco_consultorio.estado, endereco_consultorio.cidade 
+        FROM medico LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade 
+        LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio 
+        WHERE ".implode(' AND ', $filtroString)." LIMIT $offset, $perPage");
+
+        if (!empty($filtros['nome_medico'])) {
+            $stmt->bindValue(':nome_medico', $filtros['nome_medico']);
+        }
+        if (!empty($filtros['especialidade'])) {
+            $stmt->bindValue(':especialidade', $filtros['especialidade']);
+        }
+
+        $stmt->execute();
+
         if ($stmt->rowCount() > 0) {
             $array = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $array;
@@ -53,7 +74,7 @@ class Medico
     }
     
     // Cadastra um médico.
-    public function cadastrarMedico($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res = null, $num_cel = null)
+    public function cadastrarMedico($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $estado, $cidade,  $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res = null, $num_cel = null)
     {
         // Verifica se algum medico está usando o email.
         $stmt = $this->conn->prepare('SELECT * FROM medico WHERE email = :email');
@@ -69,7 +90,7 @@ class Medico
                 if ($this->validaCPF($cpf) == true && $this->validaCRM($crm) == true) {
                     // CPF e CRM válidos...
                     // Cadastrando endereço e salvando id.
-                    $id_endereco_consultorio = $this->cadastrarEndereco($nome_rua, $numero_rua, $complemento, $cep);
+                    $id_endereco_consultorio = $this->cadastrarEndereco($estado, $cidade, $nome_rua, $numero_rua, $complemento, $cep);
 
                     // Cadastrando telefone e salvando id
                     $id_telefone_medico = $this->cadastrarTelefone($num_res, $num_cel);
@@ -104,13 +125,15 @@ class Medico
     }
 
     // Cadastra um endereço e retorna o id_endereco_medico.
-    private function cadastrarEndereco($nome_rua, $numero_rua, $complemento, $cep)
+    private function cadastrarEndereco($estado, $cidade, $nome_rua, $numero_rua, $complemento, $cep)
     {
-        $stmt = $this->conn->prepare('INSERT INTO endereco_consultorio (nome_rua, numero_rua, complemento, cep) VALUES (:nome_rua, :numero_rua, :complemento, :cep)');
+        $stmt = $this->conn->prepare('INSERT INTO endereco_consultorio (nome_rua, numero_rua, complemento, cep, estado, cidade) VALUES (:nome_rua, :numero_rua, :complemento, :cep, :estado, :cidade)');
         $stmt->bindValue(':nome_rua', $nome_rua);
         $stmt->bindValue(':numero_rua', $numero_rua);
         $stmt->bindValue(':complemento', $complemento);
         $stmt->bindValue(':cep', $cep);
+        $stmt->bindValue(':estado', $estado);
+        $stmt->bindValue(':cidade', $cidade);
         $stmt->execute();
         return $this->conn->lastInsertId();
     }
