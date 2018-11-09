@@ -18,7 +18,7 @@ $enderecoMedico = $endereco->getEnderecoMedico($medico['id_endereco_consultorio'
         <div class="col-12 cabecalho-mais-detalhes">
             <h1><?php echo $especialidade['nome_especialidade'] ?></h1>
             <!-- Botão modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Agendar</button>
+            <a href="agendar-data.php?id_medico=<?php echo $id_medico; ?>">Agendar</a>
         </div>
     </div>
     <div class="row">

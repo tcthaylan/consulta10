@@ -3,7 +3,6 @@
 $p = new Paciente($conn);
 $m = new Medico($conn);
 
-// Exibir erro 
 if (!empty($_POST['email']) && isset($_POST['email'])) {
     $email = addslashes($_POST['email']);
     $senha = md5($_POST['senha']);

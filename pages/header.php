@@ -28,7 +28,7 @@
                                 <a href="area-paciente.php">Buscar médicos</a>
                             </li>
                             <li>
-                                <a href="consultas-agendadas.php">Consultas agendadas</a>
+                                <a href="consultas-agendadas-paciente.php">Consultas agendadas</a>
                             </li>
                         </ul>
                     <?php endif; ?>

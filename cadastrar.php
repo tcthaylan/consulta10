@@ -8,12 +8,14 @@
             </div>
         </div>
         <div class="row">
+            <!-- Cadastro de Pacientes -->
             <div class="col-md-6 escolha-item">
                 <img src="assets/images/pp.png" class="img-cadastro">
                 <h5>Paciente</h5>
                 <p>Tempor voluptate minim aliquip est labore tempor ad qui dolor ut cupidatat.</p>
                 <a href="cadastrar-paciente.php" class="botao-continuar">Continuar</a>
             </div>
+            <!-- Cadastro de Médicos -->
             <div class="col-md-6 escolha-item">
                 <img src="assets/images/pp.png" class="img-cadastro">
                 <h5>Médico</h5>

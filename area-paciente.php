@@ -1,7 +1,8 @@
 <?php require_once('pages/header.php'); ?>
 <?php
-if (empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 1) {
-    header('Location: index.php');
+// Verifica se o usuário é um paciente
+if (empty($_SESSION['id_usuario']) || $_SESSION['id_tipo_usuario'] != 1) {
+    header('Location: sair  .php');
     exit;
 }
 
@@ -14,7 +15,7 @@ $filtros = array(
     'estado'            => '',
     'cidade'            => ''       
 );
-
+// Verifica se existe algum filtro ativado
 if (isset($_GET['filtros'])) {
     $filtros = $_GET['filtros'];
 }
@@ -34,6 +35,7 @@ $medicos = $m->getMedicos($p, $qtd_por_pagina, $filtros);
 
 <div class="container">
     <div class="row area-usuario">
+        <!-- Filtros -->
         <div class="col-12 col-lg-4">
             <h3 class="titulo-coluna">Pesquisa Avançada</h3>
             <hr class="traco-titulo">
@@ -58,6 +60,7 @@ $medicos = $m->getMedicos($p, $qtd_por_pagina, $filtros);
                 <input type="submit" value="Filtrar" class="botao-filtrar">
             </form>
         </div>
+        <!-- Lista de médicos -->
         <div class="col-12 col-lg-8">
             <h3 class="titulo-coluna">Médicos listados</h3>
             <hr class="traco-titulo">
