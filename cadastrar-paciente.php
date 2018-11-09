@@ -35,18 +35,49 @@ if (isset($_POST['nome_paciente']) && !empty($_POST['nome_paciente'])) {
 }
 ?>
 
-<div class="form-cadastro">
-    <h2 class="form-titulo">Paciente</h2>
-    <form method="POST">
-        <input type="text" name="nome_paciente" id="nome_paciente" placeholder="Nome" class="form-control">
-        <input type="text" name="sobrenome_paciente" id="sobrenome_paciente" placeholder="Sobrenome" class="form-control">
-        <input type="text" name="data_nascimento" id="data_nascimento" placeholder="Data Nascimento" class="form-control">
-        <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control">
-        <input type="text" name="email" id="email" placeholder="Email" class="form-control">
-        <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control">
-
-        <input type="submit" value="Criar conta" class="btn btn-success">
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-12 cabecalho-cadatrar">
+            <h2>Cadastro Paciente</h2>
+            <p class="lead">Enim elit sint deserunt officia est.</p>
+            <hr>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <div class="form-cadastro">
+                <form method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="nome_paciente">Nome</label>
+                            <input type="text" name="nome_paciente" id="nome_paciente" placeholder="Nome" class="form-control">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="sobrenome_paciente">Sobrenome</label>
+                            <input type="text" name="sobrenome_paciente" id="sobrenome_paciente" placeholder="Sobrenome" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="data_nascimento">Data Nascimento</label>
+                        <input type="text" name="data_nascimento" id="data_nascimento" placeholder="dd/mm/aaaa" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="cpf">Cpf</label>
+                        <input type="text" name="cpf" id="cpf" placeholder="Cpf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control">
+                    </div>                
+                    <input type="submit" value="Criar conta" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php require_once('pages/footer.php'); ?>

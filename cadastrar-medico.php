@@ -49,36 +49,96 @@ if (isset($_POST['nome_medico']) && !empty($_POST['nome_medico'])) {
 }
 ?>
 
-<div class="form-cadastro">
-    <h2 class="form-titulo">Médico</h2>
-    <form method="POST">
-        <input type="text" name="nome_medico" id="nome_medico" placeholder="Nome" class="form-control">
-        <input type="text" name="sobrenome_medico" id="sobrenome_medico" placeholder="Sobrenome" class="form-control">
-        <input type="text" name="data_nascimento" id="data_nascimento" placeholder="Data Nascimento" class="form-control">
-        <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control">
-        <input type="text" name="crm" id="crm" placeholder="CRM" class="form-control">
-
-        <select name="id_especialidade" id="id_especialidade" class="form-control">
-            <option>Especialidade</option>
-            <?php foreach ($especialidades as $value): ?> 
-                <option value="<?php echo $value['id_especialidade'] ?>"><?php echo $value['nome_especialidade'] ?></option>    
-            <?php endforeach; ?>
-        </select>
-
-        <input type="text" name="estado" id="estado" placeholder="Estado" class="form-control">
-        <input type="text" name="cidade" id="cidade" placeholder="Cidade" class="form-control">
-
-        <input type="text" name="nome_rua" id="nome_rua" placeholder="Rua" class="form-control">
-        <input type="text" name="numero_rua" id="numero_rua" placeholder="Número" class="form-control">
-        <input type="text" name="complemento" id="complemento" placeholder="Complemento" class="form-control">
-        <input type="text" name="cep" id="cep" placeholder="CEP" class="form-control">
-        <input type="text" name="num_res" id="num_res" placeholder="Número Residencial" class="form-control">
-        <input type="text" name="num_cel" id="num_cel" placeholder="Número Celular" class="form-control">
-
-        <input type="text" name="email" id="email" placeholder="Email" class="form-control">
-        <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control">
-        <input type="submit" value="Criar conta" class="btn btn-success">
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-12 cabecalho-cadatrar">
+            <h2>Cadastro Médico</h2>
+            <p class="lead">Enim elit sint deserunt officia est.</p>
+            <hr>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="form-cadastro">
+                <form method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="nome_medico">Nome</label>
+                            <input type="text" name="nome_medico" id="nome_medico" placeholder="Nome" class="form-control">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="sobrenome_medico">Sobrenome</label>
+                            <input type="text" name="sobrenome_medico" id="sobrenome_medico" placeholder="Sobrenome" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="data_nascimento">Data Nascimento</label>
+                        <input type="text" name="data_nascimento" id="data_nascimento" placeholder="dd/mm/aaaa" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="cpf">Cpf</label>
+                        <input type="text" name="cpf" id="cpf" placeholder="Cpf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="crm">Crm</label>
+                        <input type="text" name="crm" id="crm" placeholder="Crm" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_especialidade">Especialidade</label>
+                        <select name="id_especialidade" id="id_especialidade" class="form-control">
+                            <option>Especialidade</option>
+                            <?php foreach ($especialidades as $value): ?> 
+                                <option value="<?php echo $value['id_especialidade'] ?>"><?php echo $value['nome_especialidade'] ?></option>    
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <input type="text" name="estado" id="estado" placeholder="Estado" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" name="cidade" id="cidade" placeholder="Cidade" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="nome_rua">Rua</label>
+                        <input type="text" name="nome_rua" id="nome_rua" placeholder="Rua" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="numero_rua">Número</label>
+                        <input type="text" name="numero_rua" id="numero_rua" placeholder="Número" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" name="complemento" id="complemento" placeholder="Complemento" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="cep">Cep</label>
+                        <input type="text" name="cep" id="cep" placeholder="CEP" class="form-control">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="num_res">Residencial</label>
+                            <input type="text" name="num_res" id="num_res" placeholder="Número Residencial" class="form-control">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="num_cel">Celular</label>
+                            <input type="text" name="num_cel" id="num_cel" placeholder="Número Celular" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control">
+                    </div>
+                    <input type="submit" value="Criar conta" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php require_once('pages/footer.php'); ?>

@@ -7,6 +7,7 @@
     <title>Consulta 10</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Libre+Baskerville|Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Meu CSS -->
@@ -16,10 +17,10 @@
     <!-- Navbar --> 
     <header class="header-nav">
         <div class="container">
-            <div class="logo">
-                <a href="index.php">Consulta10</a>
-            </div>
-            <div class="navegacao">
+            <div class="container-logo-nav">
+                <div class="logo">
+                    <a href="index.php">Consulta10</a>
+                </div>
                 <nav class="nav-usuario">
                     <?php if (!empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 1): ?>
                         <ul>
@@ -32,14 +33,14 @@
                         </ul>
                     <?php endif; ?>
                 </nav>
-                <div class="botoes-header">
-                    <?php if (empty($_SESSION['id_usuario'])): ?>
-                        <a href="login.php" class="botao-entrar">Entrar</a>
-                        <a href="cadastrar.php" class="botao-cadastrar">Criar conta</a>
-                    <?php else: ?>
-                        <a href="sair.php" class="botao-sair">Sair</a>
-                    <?php endif; ?>
-                </div>
+            </div>
+            <div class="botoes-header">
+                <?php if (empty($_SESSION['id_usuario'])): ?>
+                    <a href="login.php" class="botao-entrar">Entrar</a>
+                    <a href="cadastrar.php" class="botao-cadastrar">Criar conta</a>
+                <?php else: ?>
+                    <a href="sair.php" class="botao-sair">Sair</a>
+                <?php endif; ?>
             </div>
         </div>
     </header>

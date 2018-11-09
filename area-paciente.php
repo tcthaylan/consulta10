@@ -9,8 +9,10 @@ $m = new Medico($conn);
 $e = new Especialidade($conn);
 
 $filtros = array(
-    'nome_medico'   => '',
-    'especialidade' => ''       
+    'nome_medico'       => '',
+    'id_especialidade'  => '',
+    'estado'            => '',
+    'cidade'            => ''       
 );
 
 if (isset($_GET['filtros'])) {
@@ -21,53 +23,53 @@ $qtd_medicos = $m->getTotalMedicos();
 $especialidades = $e->getEspecialidades();
 
 // Paginação
-$qtd_por_pagina = 2;
+$qtd_por_pagina = 5;
 $qtd_paginas = $m->getTotalPaginas($qtd_por_pagina, $qtd_medicos, $filtros);
 $p = 1;
 if (isset($_GET['p']) && !empty($_GET['p'])) {
     $p = addslashes($_GET['p']);
 }
-
 $medicos = $m->getMedicos($p, $qtd_por_pagina, $filtros);
 ?>
 
 <div class="container">
-    <div class="row">
-        <div class="col-3">
-            <h3>Pesquisa Avançada</h3>
-            <form method="GET">
+    <div class="row area-usuario">
+        <div class="col-12 col-lg-4">
+            <h3 class="titulo-coluna">Pesquisa Avançada</h3>
+            <hr class="traco-titulo">
+            <form method="GET" class="filtros">
                 <div class="form-group">
-                    <label for="nome_medico">Nome do Médico</label>
-                    <input type="text" name="filtros[nome_medico]" id="nome_medico" class="form-control">
+                    <input type="text" name="filtros[nome_medico]" id="nome_medico" class="form-control" placeholder="Nome do médico">
                 </div>
-                <!--
                 <div class="form-group">
-                    <label for="endereco">Endereço</label>
-                    <input type="text" name="filtros[endereco]" id="endereco" class="form-control" placeholder="Cidade, estado ou região">
-                </div>
-                -->
-                <div class="form-group">
-                    <label for="especialidade">Especialização</label>
-                    <select name="filtros[especialidade]" id="especialidade" class="form-control">
+                    <select name="filtros[id_especialidade]" id="especialidade" class="form-control">
+                        <option value="">Especialidade</option>
                         <?php foreach ($especialidades as $value): ?>
                             <option value="<?php echo $value['id_especialidade'] ?>"><?php echo $value['nome_especialidade']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <input type="submit" value="Buscar" class="btn btn-primary">
+                <div class="form-group">
+                    <input type="text" name="filtros[estado]" id="estado" class="form-control" placeholder="Estado">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="filtros[cidade]" id="cidade" class="form-control" placeholder="Cidade">
+                </div>
+                <input type="submit" value="Filtrar" class="botao-filtrar">
             </form>
         </div>
-        <div class="col-9">
-            <h3><?php echo $qtd_medicos; ?> médicos listados</h3>
+        <div class="col-12 col-lg-8">
+            <h3 class="titulo-coluna">Médicos listados</h3>
+            <hr class="traco-titulo">
             <!-- Listagem de médicos -->
             <ul class="listagem_medicos">
                 <?php foreach ($medicos as $medic): ?>
                     <li class="lista_item">
-                        <h4><?php echo $medic['nome_especialidade']; ?></h4>
-                        <h5>Doutor: <?php echo $medic['nome_medico']." ".$medic['sobrenome_medico']; ?></h5>
-                        <p><?php echo $medic['cidade']." - ".$medic['estado']; ?></p>
-                        <p><?php echo $medic['desc']; ?></p>
-                        <a href="#" class="botao-mais-detalhes">Mais detalhes</a>
+                        <p class="endereco"><?php echo $medic['cidade']." - ".$medic['estado']; ?></p>
+                        <h4 class="nome_especialidade"><?php echo $medic['nome_especialidade']; ?></h4>
+                        <h5 class="nome_medico"><?php echo $medic['nome_medico']." ".$medic['sobrenome_medico']; ?></h5>
+                        <p class="desc_especialidade"><?php echo $medic['desc']; ?></p>
+                        <a href="mais-detalhes.php?id_medico=<?php echo $medic['id_medico']; ?>" class="botao-mais-detalhes">Mais detalhes</a>
                     </li>
                 <?php endforeach; ?>
             </ul>

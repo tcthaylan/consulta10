@@ -10,10 +10,11 @@
 
 
 Tarefas
-- Paginação
-- Filtros
-- Mais detalhes
-- Consultas agendadas
-- 
+- Agendar
+- Exibir consultas agendadas para o cliente
+- Exibir consultas para os médicos
 Atualizar MER
 
+Erros
+- Erro páginação
+- Erro filtros

@@ -18,4 +18,17 @@ class Especialidade
         }
         return $array;
     }
+
+    // Retorna uma especialidade
+    public function getEspecialidade($id_especialidade)
+    {
+        $stmt = $this->conn->prepare('SELECT * FROM especialidade WHERE id_especialidade = :id_especialidade');
+        $stmt->bindValue(':id_especialidade', $id_especialidade);
+        $stmt->execute();
+        $array = array();
+        if ($stmt->rowCount() > 0) {
+            $array = $stmt->fetch();
+        }
+        return $array;
+    }
 }

@@ -5,6 +5,7 @@
 }
 body {
     font-family: 'Lato', sans-serif;
+    background-color: #f6f6f6;
 }
 html, body {
     height: 100%;
@@ -15,38 +16,46 @@ html, body {
 /*================== Layout ==================*/
 /*Header-nav*/
 .header-nav {
-    background-color: #F9F9F9;
+    background-color: #FFFFFF;
 }
 .header-nav > .container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
-.header-nav .logo {
+.container-logo-nav {
+    display: flex;
     margin: 15px 0;
     line-height: 54px;
+}
+.container-logo-nav .nav-usuario{
+    margin-left: 60px;
+}
+.container-logo-nav .nav-usuario ul {
+    margin: 0;
+}
+.header-nav .logo > a {
     font-size: 30px;
     font-family: 'Libre Baskerville', serif;
+    color: #539ed1;
 }
-.navegacao {
-    display: flex;
-    justify-content: space-between;
-    width: 800px;
+.header-nav .logo > a:hover {
+    text-decoration: none;
 }
-.nav-usuario {
-    margin-left: 50px;
-}
-.nav-usuario  ul {
+.nav-usuario ul {
     list-style-type: none;
 }
 .nav-usuario ul li {
     display: inline-block;
-    padding: 0 8px;
+    padding: 0 7px;
 }
 .nav-usuario li a {
-    text-decoration: none;
     color: #000;
 }
+.nav-usuario li a:hover {
+    text-decoration: none;
+}
+
 .botao-entrar, .botao-cadastrar, .botao-sair {
     padding: 10px 27px;
     border-radius: 50px;
@@ -106,9 +115,7 @@ html, body {
 }
 
 /*Cards*/
-.cards {
-    display: flex;
-}
+
 .card-1, .card-2, .card-3 {
     color: #fff;
     padding: 60px;
@@ -141,6 +148,29 @@ html, body {
     font-weight: 700;
 }
 
+/*Especialidades*/
+.especialidades {
+    padding: 80px 0;
+}
+.especialidades h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+.especialidades h4 {
+    color: #539ed1;
+}
+.traco-especialidades {
+    border: 1px solid #63d2af;
+    width: 100px;
+    margin-bottom: 40px;
+}
+
+/*footer*/
+footer {
+    background-color: #333333;
+    color: #fff;
+    height: 80px;
+    line-height: 80px;
+}
 /*============ Login.php ===========*/
 .form-login {
     position: absolute;
@@ -204,23 +234,95 @@ html, body {
 }
 
 /*============ Area-paciente.php ============*/
+.area-usuario .titulo-coluna {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 25px;
+    margin-top: 30px;
+}
+.area-usuario .traco-titulo {
+    border: 1px solid #63D2AF;
+    margin-top: 0;  
+}
 .listagem_medicos {
     list-style-type: none;
 }
 .lista_item {
-    background-color: #F9F9F9;
-    margin: 30px 0;
+    background-color: #FFFFFF;
+    margin: 20px 0;
     padding: 20px;
-    border: 1px solid #000;
-    border-radius: 3px;
+    border-bottom: 5px solid #66A9D8;
+}
+.lista_item:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.lista_item .endereco {
+    float: right;
+}
+.lista_item .nome_especialidade {
+    color: rgb(39, 135, 204);
+}
+.lista_item .nome_medico {
+    text-transform: capitalize;
+}
+.lista_item .desc_especialidade {
+    color: rgba(0, 0, 0, 0.74);
 }
 .botao-mais-detalhes {
-    background-color: #005EA6;
+    background-color: #63D2AF;
     padding: 10px 28px;
     border-radius: 4px;
+    font-weight: 700;
     color: #fff;
+    transition: background-color 1s;
 }
 .botao-mais-detalhes:hover {
     color: #fff;
     text-decoration: none;
+    background-color: rgb(83, 184, 152);
+}
+.filtros {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+.botao-filtrar {
+    display: inline-block;
+    color: #fff;
+    background-color: #63D2AF;
+    width: 100%;
+    padding: 8px;
+    border: none;
+}
+
+/*============ Cadastrar-medico.php, Cadastrar-paciente.php ============*/
+.form-cadastro .form-group label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+.form-cadastro .form-group input {
+    height: 45px;
+}
+.cabecalho-cadatrar {
+    text-align: center;
+    margin: 35px 0;
+}
+
+/*============ mais-detalhes.php ============*/
+.cabecalho-mais-detalhes {
+    text-align: center;
+    margin: 30px 0;
+}
+.botao-agendar {
+    display: inline-block;
+    margin: 10px 0;
+    color: #000;
+    background-color: #fff;
+    padding: 12px 22px;
+    border-radius: 50px; 
+    font-weight: 700;
+}
+.botao-agendar:hover {
+    text-decoration: none;
+    color: #000;
 }

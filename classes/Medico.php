@@ -8,22 +8,39 @@ class Medico
         $this->conn = $conn;
     }
 
+    // Retorna um array contendo os dados de um médico
+    public function getMedico($id_medico)
+    {
+        $stmt = $this->conn->prepare('SELECT * FROM medico WHERE id_medico = :id_medico');
+        $stmt->bindValue(':id_medico', $id_medico);
+        $stmt->execute();
+        $array = array();
+        if ($stmt->rowCount() > 0) {
+            $array = $stmt->fetch();
+        }
+        return $array;
+    }
+
     // Retorna um array com dados dos médicos cadastrados.
     public function getMedicos($page, $perPage, $filtros)
     {
-        $array = array();
-
         $offset = ($page - 1) * $perPage;
 
         $filtroString = array("1=1");
         if (!empty($filtros['nome_medico'])) {
             $filtroString[] = "nome_medico LIKE '%:nome_medico%'";
         }
-        if (!empty($filtros['especialidade'])) {
-            $filtroString[] = 'especialidade.id_especialidade = :especialidade';
+        if (!empty($filtros['id_especialidade'])) {
+            $filtroString[] = 'especialidade.id_especialidade = :id_especialidade';
+        }
+        if (!empty($filtros['estado'])) {
+            $filtroString[] = "endereco_consultorio.estado LIKE '%:estado%'";
+        }
+        if (!empty($filtros['cidade'])) {
+            $filtroString[] = "endereco_consultorio.cidade LIKE '%:cidade%'";
         }
 
-        $stmt = $this->conn->prepare("SELECT medico.nome_medico, medico.sobrenome_medico, especialidade.nome_especialidade, especialidade.desc, endereco_consultorio.estado, endereco_consultorio.cidade 
+        $stmt = $this->conn->prepare("SELECT medico.id_medico, medico.nome_medico, medico.sobrenome_medico, especialidade.id_especialidade, especialidade.nome_especialidade, especialidade.desc, endereco_consultorio.estado, endereco_consultorio.cidade 
         FROM medico LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade 
         LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio 
         WHERE ".implode(' AND ', $filtroString)." LIMIT $offset, $perPage");
@@ -31,12 +48,19 @@ class Medico
         if (!empty($filtros['nome_medico'])) {
             $stmt->bindValue(':nome_medico', $filtros['nome_medico']);
         }
-        if (!empty($filtros['especialidade'])) {
-            $stmt->bindValue(':especialidade', $filtros['especialidade']);
+        if (!empty($filtros['id_especialidade'])) {
+            $stmt->bindValue(':id_especialidade', $filtros['id_especialidade']);
+        }
+        if (!empty($filtros['estado'])) {
+            $stmt->bindValue(':estado', $filtros['estado']);
+        }
+        if (!empty($filtros['cidade'])) {
+            $stmt->bindValue(':cidade', $filtros['cidade']);
         }
 
         $stmt->execute();
-
+        
+        $array = array();
         if ($stmt->rowCount() > 0) {
             $array = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $array;
