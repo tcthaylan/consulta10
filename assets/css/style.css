@@ -326,3 +326,27 @@ footer {
     text-decoration: none;
     color: #000;
 }
+
+/*============ consultas-agendadas.php ============*/
+.botao-cancelar-consulta {
+    background-color: #C82333;
+    padding: 10px 28px;
+    border-radius: 4px;
+    font-weight: 700;
+    color: #fff;
+    transition: background-color 1s;
+}
+.botao-cancelar-consulta:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #C82333;
+}
+
+/*============ agendar-tempo.php ===========*/
+.lista-horarios {
+    list-style-type: none;
+}
+.lista-horarios li {
+    display: inline-block;
+    margin-bottom: 2px;
+}

@@ -8,7 +8,6 @@ if (isset($_GET['id_medico'])) {
     <h1>Agendamento</h1>
     <div class="row">
         <div class="col-3">
-        <?php echo $id_medico ?>
             <form method="GET" action="agendar-tempo.php">
                 <div class="form-group">
                     <label for="date">Selecione uma data:</label>

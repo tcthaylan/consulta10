@@ -25,10 +25,17 @@
                     <?php if (!empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 1): ?>
                         <ul>
                             <li>
-                                <a href="area-paciente.php">Buscar médicos</a>
+                                <a href="buscar-medicos.php">Buscar médicos</a>
                             </li>
                             <li>
-                                <a href="consultas-agendadas-paciente.php">Consultas agendadas</a>
+                                <a href="consultas-agendadas.php">Consultas agendadas</a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
+                    <?php if (!empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 2): ?>
+                        <ul>
+                            <li>
+                                <a href="configuracoes-medico.php">Configurações</a>
                             </li>
                         </ul>
                     <?php endif; ?>

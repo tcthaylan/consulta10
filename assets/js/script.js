@@ -6,4 +6,7 @@ $(function() {
     $('#cep').mask('00000-000');
     $('#num_res').mask('(00)0000-0000');
     $('#num_cel').mask('(00)00000-0000');
+    $('#horario_inicio').mask('00:00');
+    $('#horario_fim').mask('00:00');
+    $('#intervalo').mask('00:00');
 });

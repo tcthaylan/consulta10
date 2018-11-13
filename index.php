@@ -1,10 +1,15 @@
 <?php require_once('pages/header.php'); ?>
 <?php
-if (!empty($_SESSION['id_usuario'])) {
-    header('Location: area-paciente.php');
+if (!empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 1) {
+    header('Location: buscar-medicos.php');
+    exit;
+}
+if (!empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 2) {
+    header('Location: consultas-agendadas.php');
     exit;
 }
 ?>
+
 <!-- Banner -->
 <section class="banner">
     <div class="container">
@@ -15,6 +20,7 @@ if (!empty($_SESSION['id_usuario'])) {
         </header>
     </div>
 </section>
+
 <!-- Section Cards -->
 <section class="cards">
     <div class="row">

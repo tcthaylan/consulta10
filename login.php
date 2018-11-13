@@ -9,10 +9,10 @@ if (!empty($_POST['email']) && isset($_POST['email'])) {
 
     if (!empty($_POST['email']) && !empty($_POST['senha'])) {
         if ($p->loginPaciente($email, $senha)) {
-            header('Location: area-paciente.php');
+            header('Location: buscar-medicos.php');
             exit;
         } else if ($m->loginMedico($email, $senha)) {
-            header('Location: area-paciente.php');
+            header('Location: consultas-agendadas.php');
             exit;
         } else {
             ?>

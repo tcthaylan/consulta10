@@ -11,12 +11,17 @@ class Medico
     // Retorna um array contendo os dados de um médico
     public function getMedico($id_medico)
     {
-        $stmt = $this->conn->prepare('SELECT * FROM medico WHERE id_medico = :id_medico');
+        $stmt = $this->conn->prepare('SELECT medico.*, especialidade.*, endereco_consultorio.*, telefone_medico.*
+        FROM medico
+        LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade
+        LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio
+        LEFT JOIN telefone_medico ON telefone_medico.id_telefone_medico = medico.id_telefone_medico
+        WHERE id_medico = :id_medico');
         $stmt->bindValue(':id_medico', $id_medico);
         $stmt->execute();
         $array = array();
         if ($stmt->rowCount() > 0) {
-            $array = $stmt->fetch();
+            $array = $stmt->fetch(PDO::FETCH_ASSOC);
         }
         return $array;
     }
@@ -98,8 +103,8 @@ class Medico
     }
     
     // Cadastra um médico.
-    public function cadastrarMedico($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $estado, $cidade,  $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $num_res = null, $num_cel = null)
-    {
+    public function cadastrarMedico($nome_medico, $sobrenome_medico, $cpf, $crm, $data_nascimento, $id_especialidade, $estado, $cidade, $nome_rua, $numero_rua, $complemento, $cep, $id_tipo_usuario, $email, $senha, $horario_inicio, $horario_fim, $intervalo, $num_res = null, $num_cel = null)
+    {   
         // Verifica se algum medico está usando o email.
         $stmt = $this->conn->prepare('SELECT * FROM medico WHERE email = :email');
         $stmt->bindValue(':email', $email);
@@ -115,12 +120,15 @@ class Medico
                     // CPF e CRM válidos...
                     // Cadastrando endereço e salvando id.
                     $id_endereco_consultorio = $this->cadastrarEndereco($estado, $cidade, $nome_rua, $numero_rua, $complemento, $cep);
-
+                    
                     // Cadastrando telefone e salvando id
                     $id_telefone_medico = $this->cadastrarTelefone($num_res, $num_cel);
+                    
+                    // Cadatrando horário de atendimento e salvando id
+                    $id_horario_medico = $this->cadastrarHorario($horario_inicio, $horario_fim, $intervalo);
 
                     // Cadastrando médico.
-                    $stmt = $this->conn->prepare('INSERT INTO medico VALUES (DEFAULT, :nome_medico, :sobrenome_medico, :cpf, :crm, :data_nascimento, :id_especialidade, :id_endereco_consultorio, :id_tipo_usuario, :id_telefone_medico, :email, :senha)');
+                    $stmt = $this->conn->prepare('INSERT INTO medico VALUES (DEFAULT, :nome_medico, :sobrenome_medico, :cpf, :crm, :data_nascimento, :id_especialidade, :id_endereco_consultorio, :id_tipo_usuario, :id_telefone_medico, :email, :senha, :id_horario_medico)');
                     $stmt->bindValue(':nome_medico', $nome_medico);
                     $stmt->bindValue(':sobrenome_medico', $sobrenome_medico);
                     $stmt->bindValue(':cpf', $cpf);
@@ -132,6 +140,7 @@ class Medico
                     $stmt->bindValue(':id_telefone_medico', $id_telefone_medico);
                     $stmt->bindValue(':email', $email);
                     $stmt->bindValue(':senha', $senha);
+                    $stmt->bindValue(':id_horario_medico', $id_horario_medico);
                     $stmt->execute();
                     return true;
                 } else {
@@ -168,6 +177,17 @@ class Medico
         $stmt = $this->conn->prepare('INSERT INTO telefone_medico (num_residente, num_celular) VALUES (:num_residente, :num_celular)');
         $stmt->bindValue(':num_residente', $num_res);
         $stmt->bindValue(':num_celular', $num_cel);
+        $stmt->execute();
+        return $this->conn->lastInsertId();
+    }
+
+    // Cadastra um horário de atendimento
+    private function cadastrarHorario($horario_inicio, $horario_fim, $intervalo)
+    {
+        $stmt = $this->conn->prepare('INSERT INTO horario_medico (horario_inicio, horario_fim, intervalo) VALUES (:horario_inicio, :horario_fim, :intervalo)');
+        $stmt->bindValue(':horario_inicio', $horario_inicio);
+        $stmt->bindValue(':horario_fim', $horario_fim);
+        $stmt->bindValue(':intervalo', $intervalo);
         $stmt->execute();
         return $this->conn->lastInsertId();
     }
@@ -246,5 +266,43 @@ class Medico
     {
         $qtd_paginas = $total_medicos / $qtd_por_pagina;
         return $qtd_paginas;
+    }
+
+    public function editarMedico($id_medico, $id_telefone_medico, $id_endereco_consultorio, $id_horario_medico, $nome_medico, $sobrenome_medico, $data_nascimento, $id_especialidade, $estado, $cidade, $nome_rua, $numero_rua, $complemento, $cep, $horario_inicio, $horario_fim, $intervalo, $num_res = null, $num_cel = null)
+    {   
+        // Atualizando endereço
+        $stmt = $this->conn->prepare('UPDATE endereco_consultorio SET estado = :estado, cidade = :cidade, nome_rua = :nome_rua, complemento = :complemento, cep = :cep WHERE id_endereco_consultorio = :id_endereco_consultorio');
+        $stmt->bindValue(':id_endereco_consultorio', $id_endereco_consultorio);
+        $stmt->bindValue(':estado', $estado);
+        $stmt->bindValue(':cidade', $cidade);
+        $stmt->bindValue(':nome_rua', $nome_rua);
+        $stmt->bindValue(':complemento', $complemento);
+        $stmt->bindValue(':cep', $cep);
+        $stmt->execute();
+
+        // Atualizando telefone
+        $stmt = $this->conn->prepare('UPDATE telefone_medico SET num_residente = :num_res, num_celular = :num_cel WHERE id_telefone_medico = :id_telefone_medico');
+        $stmt->bindValue(':id_telefone_medico', $id_telefone_medico);
+        $stmt->bindValue(':num_res', $num_res);
+        $stmt->bindValue(':num_cel', $num_cel);
+        $stmt->execute();
+
+        // Atualizando horario de atendimento
+        $stmt = $this->conn->prepare('UPDATE horario_medico SET horario_inicio = :horario_inicio, horario_fim = :horario_fim, intervalo = :intervalo');
+        $stmt->bindValue(':horario_inicio', $horario_inicio);
+        $stmt->bindValue(':horario_fim', $horario_fim);
+        $stmt->bindValue(':intervalo', $intervalo);
+        $stmt->execute();
+
+        // Atualizando dados do médico
+        $stmt = $this->conn->prepare('UPDATE medico SET nome_medico = :nome_medico, sobrenome_medico = :sobrenome_medico, data_nascimento = :data_nascimento, id_especialidade = :id_especialidade WHERE id_medico = :id_medico');
+        $stmt->bindValue(':id_medico', $id_medico);
+        $stmt->bindValue(':nome_medico', $nome_medico);
+        $stmt->bindValue(':sobrenome_medico', $sobrenome_medico);
+        $stmt->bindValue(':data_nascimento', $data_nascimento);
+        $stmt->bindValue(':id_especialidade', $id_especialidade);
+        $stmt->execute();
+
+        return true;
     }
 }

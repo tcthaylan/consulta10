@@ -11,7 +11,12 @@ class Consulta
     // Busca consultas de um determinado paciente
     public function getConsultasPaciente($id_paciente)
     {
-        $stmt = $this->conn('SELECT * FROM consulta WHERE id_paciente = :id_paciente');
+        $stmt = $this->conn->prepare('SELECT consulta.id_consulta, consulta.data_inicio, consulta.status, medico.nome_medico, medico.sobrenome_medico, medico.email, especialidade.nome_especialidade, especialidade.desc, endereco_consultorio.nome_rua, endereco_consultorio.numero_rua, endereco_consultorio.cidade, endereco_consultorio.estado
+        FROM consulta 
+        LEFT JOIN medico ON consulta.id_medico = medico.id_medico
+        LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade
+        LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio
+        WHERE id_paciente = :id_paciente AND status = 1;');
         $stmt->bindValue(':id_paciente', $id_paciente);
         $stmt->execute();
         $array = array();
@@ -25,7 +30,10 @@ class Consulta
     // Busca consultas de um determinado médico
     public function getConsultasMedico($id_medico)
     {
-        $stmt = $this->conn('SELECT * FROM consulta WHERE id_medico = :id_medico');
+        $stmt = $this->conn->prepare('SELECT consulta.id_consulta, consulta.data_inicio, consulta.status, paciente.nome_paciente, paciente.sobrenome_paciente, paciente.email 
+        FROM consulta
+        LEFT JOIN paciente ON consulta.id_paciente = paciente.id_paciente 
+        WHERE id_medico = :id_medico AND status = 1');
         $stmt->bindValue(':id_medico', $id_medico);
         $stmt->execute();
         $array = array();
@@ -60,6 +68,14 @@ class Consulta
         $stmt->bindValue(':id_medico', $id_medico);
         $stmt->bindValue(':data_inicio', $data_inicio);
         $stmt->bindValue(':data_fim', $data_fim);
+        $stmt->execute();
+    }
+
+    // Cancela uma consulta
+    public function cancelarConsulta($id_consulta)
+    {
+        $stmt = $this->conn->prepare('UPDATE consulta SET status = 0 WHERE id_consulta = :id_consulta');
+        $stmt->bindValue(':id_consulta', $id_consulta);
         $stmt->execute();
     }
 }

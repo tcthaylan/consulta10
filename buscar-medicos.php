@@ -2,7 +2,7 @@
 <?php
 // Verifica se o usuário é um paciente
 if (empty($_SESSION['id_usuario']) || $_SESSION['id_tipo_usuario'] != 1) {
-    header('Location: sair  .php');
+    header('Location: sair.php');
     exit;
 }
 
