@@ -12,13 +12,26 @@ if (!empty($_GET['date']) && !empty($_GET['id_medico'])) {
     $data = addslashes($_GET['date']);
     $dataInicio = strtotime($data.$horarioMedico['horario_inicio']);
     $dataFim = strtotime($data.$horarioMedico['horario_fim']);
+
     $horarioIntervalo = explode(':', $horarioMedico['intervalo']);
+    $horas = intval($horarioIntervalo[0]);
+    $minutos = intval($horarioIntervalo[1]);
 
-    //$horas = intval($horarioIntervalo[0]);
-    //$minutos = intval($horarioIntervalo[1]);
+    $minutosTimestamp = $minutos * 60;
+    $horasTimestamp = $horas * 60 * 60;
 
-    $intervalo = 60*30;
-
+    $intervalo = 0;
+    if ($minutosTimestamp > 0 && $horasTimestamp > 0) {
+        $intervalo = $horasTimestamp + $minutosTimestamp;
+    } else if ($minutosTimestamp > 0 && $horasTimestamp <= 0) {
+        $intervalo = $minutosTimestamp;
+    } else {
+        $intervalo = $horasTimestamp;
+    }
+} else {
+    $id_medico = addslashes($_GET['id_medico']);
+    header('Location: agendar-data.php?id_medico='.$id_medico);
+    exit;
 }
 
 ?>  
@@ -31,7 +44,7 @@ if (!empty($_GET['date']) && !empty($_GET['id_medico'])) {
     <h1>Agendamento</h1>
     <p>Data: <?php echo date('d/m/Y', strtotime($data)); ?></p>
     <div class="row">
-        <div class="col-7">
+        <div class="col-md-7">
             <p>Selecione o horário: </p>
             <ul class="lista-horarios">
                 <?php for ($i = $dataInicio; $i < $dataFim; $i+=$intervalo): ?>

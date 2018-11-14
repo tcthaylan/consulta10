@@ -27,10 +27,11 @@ class Medico
     }
 
     // Retorna um array com dados dos médicos cadastrados.
-    public function getMedicos($page, $perPage, $filtros)
+    public function getMedicos($page, $perPage)
     {
         $offset = ($page - 1) * $perPage;
 
+        /* Filtros desabilitados
         $filtroString = array("1=1");
         if (!empty($filtros['nome_medico'])) {
             $filtroString[] = "nome_medico LIKE '%:nome_medico%'";
@@ -44,12 +45,13 @@ class Medico
         if (!empty($filtros['cidade'])) {
             $filtroString[] = "endereco_consultorio.cidade LIKE '%:cidade%'";
         }
-
+        */
         $stmt = $this->conn->prepare("SELECT medico.id_medico, medico.nome_medico, medico.sobrenome_medico, especialidade.id_especialidade, especialidade.nome_especialidade, especialidade.desc, endereco_consultorio.estado, endereco_consultorio.cidade 
         FROM medico LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade 
         LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio 
-        WHERE ".implode(' AND ', $filtroString)." LIMIT $offset, $perPage");
+        LIMIT $offset, $perPage");
 
+        /* Filtros desabilitados
         if (!empty($filtros['nome_medico'])) {
             $stmt->bindValue(':nome_medico', $filtros['nome_medico']);
         }
@@ -62,7 +64,7 @@ class Medico
         if (!empty($filtros['cidade'])) {
             $stmt->bindValue(':cidade', $filtros['cidade']);
         }
-
+        */
         $stmt->execute();
         
         $array = array();
@@ -128,7 +130,7 @@ class Medico
                     $id_horario_medico = $this->cadastrarHorario($horario_inicio, $horario_fim, $intervalo);
 
                     // Cadastrando médico.
-                    $stmt = $this->conn->prepare('INSERT INTO medico VALUES (DEFAULT, :nome_medico, :sobrenome_medico, :cpf, :crm, :data_nascimento, :id_especialidade, :id_endereco_consultorio, :id_tipo_usuario, :id_telefone_medico, :email, :senha, :id_horario_medico)');
+                    $stmt = $this->conn->prepare('INSERT INTO medico VALUES (DEFAULT, :nome_medico, :sobrenome_medico, :email, :senha, :cpf, :crm, :data_nascimento, :id_especialidade, :id_endereco_consultorio, :id_tipo_usuario, :id_telefone_medico, :id_horario_medico)');
                     $stmt->bindValue(':nome_medico', $nome_medico);
                     $stmt->bindValue(':sobrenome_medico', $sobrenome_medico);
                     $stmt->bindValue(':cpf', $cpf);

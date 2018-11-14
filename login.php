@@ -8,7 +8,7 @@ if (!empty($_POST['email']) && isset($_POST['email'])) {
     $senha = md5($_POST['senha']);
 
     if (!empty($_POST['email']) && !empty($_POST['senha'])) {
-        if ($p->loginPaciente($email, $senha)) {
+        if ($p->loginPaciente($email, $senha) == true) {
             header('Location: buscar-medicos.php');
             exit;
         } else if ($m->loginMedico($email, $senha)) {

@@ -17,7 +17,7 @@
             </div>
             <!-- Cadastro de Médicos -->
             <div class="col-md-6 escolha-item">
-                <img src="assets/images/pp.png" class="img-cadastro">
+                <img src="assets/images/medico.jpg" class="img-cadastro rounded-circle">
                 <h5>Médico</h5>
                 <p>Tempor voluptate minim aliquip est labore tempor ad qui dolor ut cupidatat.</p>
                 <a href="cadastrar-medico.php" class="botao-continuar">Continuar</a>

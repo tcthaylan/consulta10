@@ -9,6 +9,7 @@ if (empty($_SESSION['id_usuario']) || $_SESSION['id_tipo_usuario'] != 1) {
 $m = new Medico($conn);
 $e = new Especialidade($conn);
 
+/* Filtros desabilitado
 $filtros = array(
     'nome_medico'       => '',
     'id_especialidade'  => '',
@@ -19,18 +20,19 @@ $filtros = array(
 if (isset($_GET['filtros'])) {
     $filtros = $_GET['filtros'];
 }
+*/
 
-$qtd_medicos = $m->getTotalMedicos();
 $especialidades = $e->getEspecialidades();
 
 // Paginação
+$qtd_medicos = $m->getTotalMedicos();
 $qtd_por_pagina = 5;
-$qtd_paginas = $m->getTotalPaginas($qtd_por_pagina, $qtd_medicos, $filtros);
+$qtd_paginas = $m->getTotalPaginas($qtd_por_pagina, $qtd_medicos);
 $p = 1;
 if (isset($_GET['p']) && !empty($_GET['p'])) {
     $p = addslashes($_GET['p']);
 }
-$medicos = $m->getMedicos($p, $qtd_por_pagina, $filtros);
+$medicos = $m->getMedicos($p, $qtd_por_pagina);
 ?>
 
 <div class="container">
@@ -39,7 +41,7 @@ $medicos = $m->getMedicos($p, $qtd_por_pagina, $filtros);
         <div class="col-12 col-lg-4">
             <h3 class="titulo-coluna">Pesquisa Avançada</h3>
             <hr class="traco-titulo">
-            <form method="GET" class="filtros">
+            <form method="GET" class="filtros" onsubmit="return false">
                 <div class="form-group">
                     <input type="text" name="filtros[nome_medico]" id="nome_medico" class="form-control" placeholder="Nome do médico">
                 </div>
@@ -79,9 +81,9 @@ $medicos = $m->getMedicos($p, $qtd_por_pagina, $filtros);
             <!-- Paginação -->
             <nav>
                 <ul class="pagination">
-                    <?php for ($i = 1; $i <= $qtd_paginas; $i++):?>
+                    <?php for ($i = 1; $i <= ceil($qtd_paginas); $i++):?>
                     <li class="page-item <?php echo($p == $i)?'active':''; ?>">
-                        <a href="area-paciente.php?<?php
+                        <a href="buscar-medicos.php?<?php
                         $url = $_GET;
                         $url['p'] = $i;
                         echo http_build_query($url);

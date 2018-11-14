@@ -10,8 +10,16 @@
 
 
 Tarefas
-- Filtros
-- criar nova tabela 'horario_atendimento'
-- configurações paciente/médico
-- recuperar senha
-- envio de email - para cancelamento e agendamento
+- Filtros desabilitar - OK
+- corrigir paginação - OK
+- Exibir consultas agendadas ordenadas data - OK
+- intervalo das consultas dinâmico - OK
+- layout responsivo - OK
+- criar script bd - OK
+- refazer o precesso de "instalação" do site - OK
+- criar manual - 
+
+Tarefas menos importantes
+- comentar código
+- organizar css
+- pequenas alterações na aparência do site

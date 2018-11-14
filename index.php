@@ -64,29 +64,27 @@ if (!empty($_SESSION['id_usuario']) && $_SESSION['id_tipo_usuario'] == 2) {
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class="col-sm-6 col-md-4 card-especialidade">
                 <h4>Cardiologia</h4>
                 <p>Your health is your most important asset. You should entrust it only to the best professionals.</p>
             </div>
-            <div class="col-4">
+            <div class="col-sm-6 col-md-4 card-especialidade">
                 <h4>Dermatologia</h4>
                 <p>Your health is your most important asset. You should entrust it only to the best professionals.</p>
             </div>
-            <div class="col-4">
+            <div class="col-sm-6 col-md-4 card-especialidade">
                 <h4>Geriatria</h4>
                 <p>Your health is your most important asset. You should entrust it only to the best professionals.</p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
+            <div class="col-sm-6 col-md-4 card-especialidade">
                 <h4>Infectologia</h4>
                 <p>Your health is your most important asset. You should entrust it only to the best professionals.</p>
             </div>
-            <div class="col-4">
+            <div class="col-sm-6 col-md-4 card-especialidade">
                 <h4>Neurologia</h4>
                 <p>Your health is your most important asset. You should entrust it only to the best professionals.</p>
             </div>
-            <div class="col-4">
+            <div class="col-sm-6 col-md-4 card-especialidade">
                 <h4>Psiquiatria</h4>
                 <p>Your health is your most important asset. You should entrust it only to the best professionals.</p>
             </div>

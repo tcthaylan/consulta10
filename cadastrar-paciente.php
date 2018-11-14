@@ -44,15 +44,15 @@ if (isset($_POST['nome_paciente']) && !empty($_POST['nome_paciente'])) {
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-7">
+        <div class="col-sm-12 col-10">
             <div class="form-cadastro">
                 <form method="POST">
                     <div class="form-row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-md-6">
                             <label for="nome_paciente">Nome</label>
                             <input type="text" name="nome_paciente" id="nome_paciente" placeholder="Nome" class="form-control">
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-md-6">
                             <label for="sobrenome_paciente">Sobrenome</label>
                             <input type="text" name="sobrenome_paciente" id="sobrenome_paciente" placeholder="Sobrenome" class="form-control">
                         </div>

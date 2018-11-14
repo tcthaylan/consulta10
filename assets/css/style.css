@@ -14,6 +14,7 @@ html, body {
     height: 70%;
 }
 /*================== Layout ==================*/
+/*============ index.php ============*/
 /*Header-nav*/
 .header-nav {
     background-color: #FFFFFF;
@@ -157,11 +158,15 @@ html, body {
 }
 .especialidades h4 {
     color: #539ed1;
+    font-weight: 700;
 }
 .traco-especialidades {
     border: 1px solid #63d2af;
     width: 100px;
     margin-bottom: 40px;
+}
+.card-especialidade {
+    margin-bottom: 10px;
 }
 
 /*footer*/
@@ -200,7 +205,7 @@ footer {
     border: none;
     display: inline-block;
 }
-/*============ Registrar.php ============*/
+/*============ registrar.php ============*/
 .escolha {
     text-align: center;
 }
@@ -210,6 +215,9 @@ footer {
 }
 .escolha-item {
     padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .escolha-item h5 {
     font-size: 27px;
@@ -218,6 +226,10 @@ footer {
 .escolha-item p {
     color: #C0BFC1;
     font-size: 17px;
+    margin-bottom: 4px; 
+}
+.img-cadastro {
+    width: 200px;
 }
 .botao-continuar {
     background-color: #005EA6;
@@ -349,4 +361,54 @@ footer {
 .lista-horarios li {
     display: inline-block;
     margin-bottom: 2px;
+}
+
+
+/* =========================== MEDIA QUERIES =========================== */
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+    /*============ index.php ============*/
+    /*Banner*/
+    .texto-banner p {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    /*============ registrar.php ============*/
+    .escolha h2 {
+        font-size: 30px;
+    }
+    .escolha-item {
+        margin-bottom: 45px;
+    }
+    .botao-continuar {
+        width: 100%;
+    }
+}
+
+/*Small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) {
+    /*============ index.php ============*/
+    /*Banner*/
+    .texto-banner h1 {
+        font-size: 65px;
+    }
+    /*============ registrar.php ============*/
+    .escolha-item {
+        margin-bottom: 45px;
+    }
+    .botao-continuar {
+        width: 100%;
+    }
+}
+
+/*Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+
+}
+
+/*Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+
 }

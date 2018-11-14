@@ -22,14 +22,14 @@ $enderecoMedico = $endereco->getEnderecoMedico($medico['id_endereco_consultorio'
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-4">
             <h2>Sobre o Doutor(a)</h2>
             <hr>
             <p>Nome: <?php echo $medico['nome_medico']." ".$medico['sobrenome_medico']; ?></p>
             <p>Email: <?php echo $medico['email']; ?></p>
             <p>Endereço do consultorio: <?php echo $enderecoMedico['nome_rua'].", ".$enderecoMedico['numero_rua'].", ".$enderecoMedico['cidade']." - ".$enderecoMedico['estado']; ?></p>
         </div>
-        <div class="col-8">
+        <div class="col-md-8">
             <h2>Sobre a Especialidade</h2>
             <hr>
             <p><?php echo $especialidade['desc']; ?></p>

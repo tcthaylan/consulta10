@@ -16,7 +16,8 @@ class Consulta
         LEFT JOIN medico ON consulta.id_medico = medico.id_medico
         LEFT JOIN especialidade ON especialidade.id_especialidade = medico.id_especialidade
         LEFT JOIN endereco_consultorio ON endereco_consultorio.id_endereco_consultorio = medico.id_endereco_consultorio
-        WHERE id_paciente = :id_paciente AND status = 1;');
+        WHERE id_paciente = :id_paciente AND status = 1
+        ORDER BY data_inicio;');
         $stmt->bindValue(':id_paciente', $id_paciente);
         $stmt->execute();
         $array = array();
@@ -33,7 +34,8 @@ class Consulta
         $stmt = $this->conn->prepare('SELECT consulta.id_consulta, consulta.data_inicio, consulta.status, paciente.nome_paciente, paciente.sobrenome_paciente, paciente.email 
         FROM consulta
         LEFT JOIN paciente ON consulta.id_paciente = paciente.id_paciente 
-        WHERE id_medico = :id_medico AND status = 1');
+        WHERE id_medico = :id_medico AND status = 1
+        ORDER BY data_inicio');
         $stmt->bindValue(':id_medico', $id_medico);
         $stmt->execute();
         $array = array();

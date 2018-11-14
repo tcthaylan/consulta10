@@ -64,16 +64,16 @@ $medico = $m->getMedico($_SESSION['id_usuario']);
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-10">
             <div class="form-cadastro">
                 <!-- Editar Perfil -->
                 <form method="POST">
                     <div class="form-row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-md-6">
                             <label for="nome_medico">Nome</label>
                             <input type="text" name="nome_medico" id="nome_medico" placeholder="Nome" class="form-control" value="<?php echo $medico['nome_medico'] ?>">
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-md-6">
                             <label for="sobrenome_medico">Sobrenome</label>
                             <input type="text" name="sobrenome_medico" id="sobrenome_medico" placeholder="Sobrenome" class="form-control" value="<?php echo $medico['sobrenome_medico'] ?>">
                         </div>
@@ -126,15 +126,15 @@ $medico = $m->getMedico($_SESSION['id_usuario']);
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-5">
+                        <div class="form-group col-4">
                             <label for="horario_inicio">Inicio do turno</label>
                             <input type="text" name="horario_inicio" id="horario_inicio" class="form-control" placeholder="ex: 10:30" value="<?php echo $horarioMedico['horario_inicio'] ?>">
                         </div>
-                        <div class="form-group col-5">
+                        <div class="form-group col-4">
                             <label for="horario_fim">Fim do turno</label>
                             <input type="text" name="horario_fim" id="horario_fim" class="form-control" placeholder="ex: 17:00" value="<?php echo $horarioMedico['horario_fim'] ?>">
                         </div>
-                        <div class="form-group col-2">
+                        <div class="form-group col-4">
                             <label for="intervalo">Intervalo</label>
                             <input type="text" name="intervalo" id="intervalo" class="form-control" placeholder="ex: 00:30" value="<?php echo $horarioMedico['intervalo'] ?>">
                         </div>
